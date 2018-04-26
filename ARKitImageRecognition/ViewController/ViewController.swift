@@ -28,6 +28,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     private var isDuringJoinSequence = false
     let locationManager = CLLocationManager()
     var trueHeading : CLLocationDirection?
+    let playerName = UUID().uuidString
     
     /// The view controller that displays the status and "restart experience" UI.
     lazy var statusViewController: StatusViewController = {
@@ -49,16 +50,6 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         sceneView.delegate = self
         sceneView.session.delegate = self
         
-        posMessageTimer = Timer.scheduledTimer(withTimeInterval: 10, repeats: true, block: { [weak self] _ in
-            if let camPos = self?.getCameraPosition() {
-                // Create a transform with a translation of 0.2 meters in front
-                // of the cameraq
-                let s = String(format: "Pos:[%.2f,%.2f,%.2f]",camPos.x,camPos.y,camPos.z)
-                self?.statusViewController.showMessage(s)
-                print(s)
-            }
-        })
-
         // Hook up status view controller callback(s).
         statusViewController.restartExperienceHandler = { [unowned self] in
             self.restartExperience()
@@ -112,13 +103,9 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         loadImage()
     }
     
-    func allignWorldToCoordinator(transform: SCNMatrix4) {
-        var mat = transform
-        mat.m41 = -mat.m41
-        mat.m42 = -mat.m42
-        mat.m43 = -mat.m43
-        let m2 = SCNMatrix4MakeTranslation(mat.m41,mat.m42,mat.m43)
-        session.setWorldOrigin(relativeTransform: float4x4.init(m2))
+    func alignWorldToCoordinator(vector: SCNVector3) {
+        let translate = SCNMatrix4MakeTranslation(-vector.x, -vector.y, -vector.z)
+        session.setWorldOrigin(relativeTransform: float4x4.init(translate))
         stopJoinSequence()
     }
     
@@ -130,14 +117,33 @@ class ViewController: UIViewController, ARSCNViewDelegate {
 
         // Start the AR experience
         resetTracking()
+        
+        posMessageTimer = Timer.scheduledTimer(
+                            timeInterval:0.05,
+                            target: self,
+                            selector: #selector(ViewController.sendCameraPos),
+                            userInfo: nil,
+                            repeats: true)
 	}
 	
 	override func viewWillDisappear(_ animated: Bool) {
 		super.viewWillDisappear(animated)
+        posMessageTimer?.invalidate()
 
         session.pause()
 	}
 
+    
+    var cameraNode : SCNNode?
+    
+    @objc func sendCameraPos() {
+        guard let camPos = self.getCameraPosition() else { return }
+        let obj = ARObject(uuid: "camera-"+playerName, vector: camPos)
+        netAppLayer?.sendCameraMessage(camera: obj)
+        // let s = String(format: "Pos:[%.2f,%.2f,%.2f]",camPos.x,camPos.y,camPos.z)
+        //self.statusViewController.showMessage(s)
+        // print(s)
+    }
     // MARK: - Session management (Image detection setup)
     
     /// Prevents restarting the session while a restart is in progress.
@@ -160,24 +166,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
 
         session.run(configuration, options: [.resetTracking, .removeExistingAnchors])
 
-//        Timer.scheduledTimer(withTimeInterval: 3, repeats: false, block: { [weak self] _ in
-           // guard let cam = getCameraPosition() else { return }
-          //  let transform = SCNMatrix4MakeTranslation(cam.x, cam.y, cam.z)
-/*
-            CGAffineTransform(rotationAngle: angle)
-            SCNMatrix4R
-            session.setWorldOrigin(relativeTransform: float4x4.init(transform))
-*/
-        // [0.52,-0.13,-0.41]
-        // [-0.29,-0.43,-0.49]
-            
-            
-            self.addAxisWorldOrigin()
-            self.statusViewController.showMessage("Reseting world origin")
-//        })
-        // [-0.60,-0.69,-0.64]
-        // [0.44,-0.55,0.70]
-        // -0.29,-0.75,-0.61
+        self.addAxisWorldOrigin()
+        self.statusViewController.showMessage("Reseting world origin")
         statusViewController.scheduleMessage("Look around to detect images", inSeconds: 7.5, messageType: .contentPlacement)
 	}
 
@@ -213,7 +203,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         }
         
         updateQueue.async {
-            self.sendWorldAlignmentMessage(coodrdinates: SCNMatrix4(anchor.transform))
+            self.sendWorldAlignmentMessage(vector: SCNMatrix4(anchor.transform).vector)
         }
 
         updateQueue.async {
@@ -251,7 +241,6 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         let location = SCNVector3(transform.m41, transform.m42, transform.m43)
         return location
     }
-    
     
     func addTapGestureToSceneView() {
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ViewController.didTap(withGestureRecognizer:)))
@@ -299,23 +288,11 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             var translation = matrix_identity_float4x4
             translation.columns.3.z = -1.0
             let transform = simd_mul(currentFrame.camera.transform,translation)
-            addBoxOnTransform(id: UUID().uuidString, transform: SCNMatrix4(transform))
+            _ = addBoxOnTransform(id: "obj-"+UUID().uuidString, transform: SCNMatrix4(transform))
         }
     }
     
-    func addBoxOnTransform(id: String, transform: SCNMatrix4) {
-        let boxNode = SCNNode()
-        let box = SCNBox(width: 0.05, height: 0.05, length: 0.05, chamferRadius: 0)
-        boxNode.geometry = box
-        boxNode.name = id
-        boxNode.transform = transform
-        sceneView.scene.rootNode.addChildNode(boxNode)
-    }
-
-    func addBoxForAxis(width: CGFloat, height: CGFloat, length: CGFloat) {
-        let boxNode = SCNNode()
-        let box = SCNBox(width: width, height: height, length: length, chamferRadius: 0)
-        
+    func boxColor() -> [SCNMaterial] {
         let colors = [UIColor.green, // front
             UIColor.red, // right
             UIColor.blue, // back
@@ -323,14 +300,30 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             UIColor.purple, // top
             UIColor.gray] // bottom
         
-        let sideMaterials = colors.map { color -> SCNMaterial in
+        return colors.map { color -> SCNMaterial in
             let material = SCNMaterial()
             material.diffuse.contents = color
             material.locksAmbientWithDiffuse = true
             return material
         }
+    }
+    
+    func addBoxOnTransform(id: String, transform: SCNMatrix4) -> SCNNode {
+        let boxNode = SCNNode()
+        let box = SCNBox(width: 0.05, height: 0.05, length: 0.05, chamferRadius: 0)
+        box.materials = boxColor()
+        boxNode.geometry = box
+        boxNode.name = id
+        boxNode.transform = transform
+        sceneView.scene.rootNode.addChildNode(boxNode)
+        return boxNode
+    }
+
+    func addBoxForAxis(width: CGFloat, height: CGFloat, length: CGFloat) {
+        let boxNode = SCNNode()
+        let box = SCNBox(width: width, height: height, length: length, chamferRadius: 0)
         
-        box.materials = sideMaterials
+        box.materials = boxColor()
         boxNode.geometry = box
         
         boxNode.transform = SCNMatrix4MakeTranslation(0,0,0)

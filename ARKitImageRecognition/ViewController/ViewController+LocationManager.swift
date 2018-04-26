@@ -33,6 +33,6 @@ extension ViewController:  CLLocationManagerDelegate {
         let heading = newHeading.trueHeading
         let accuracy = newHeading.headingAccuracy
         print("accuracy:\(accuracy) heading:\(heading);\(heading.degreesToRadians)")
-        self.statusViewController.showMessage("North: acc:\(accuracy) heading:\(heading)")
+        // self.statusViewController.showMessage("North: acc:\(accuracy) heading:\(heading)")
     }
 }

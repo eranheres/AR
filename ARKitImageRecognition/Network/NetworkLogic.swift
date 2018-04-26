@@ -162,7 +162,7 @@ class PhotonListener : NSObject, EGLoadBalancingListener
 			{
 				let v = eventContent as! NSString;
                 let s = v as String
-                self.delegateView.log("msg:p-\(playerNr):"+s)
+                // self.delegateView.log("msg:p-\(playerNr):"+s)
                 self.delegateTransportLayer?.handleRx(messageId: UInt8(eventCode), message: s)
 //               self.delegateView.messageReceived(s)
 			}
@@ -176,7 +176,7 @@ class NetworkLogic : NetworkTransportLayerDelegate, NetworkTransportLayerProtoco
 	let demoView : PhotonDelegateView
 	var listenerRef : PhotonListener! // store reference to prevent listener destroy
     let netApplicationLayer : NetworkApplicationLayer
-	
+    	
     init(demoView : PhotonDelegateView, networkApplicationLayer: NetworkApplicationLayer)
 	{
 		self.demoView = demoView
@@ -190,13 +190,13 @@ class NetworkLogic : NetworkTransportLayerDelegate, NetworkTransportLayerProtoco
 	}
     
     func handleRx(messageId: UInt8, message: String) {
-        demoView.log("rx:\(messageId):"+message)
+        // demoView.log("rx:\(messageId):"+message)
         netApplicationLayer.handleRx(msgId: messageId, str: message)
     }
     
     func sendMessage(messageId: UInt8, message: String) {
         if(client.isInGameRoom) {
-            demoView.log("tx:\(messageId):"+message)
+            // demoView.log("tx:\(messageId):"+message)
             let v = message as NSString
             client.opRaiseEvent(true, v, messageId)
         }
@@ -212,7 +212,7 @@ class NetworkLogic : NetworkTransportLayerDelegate, NetworkTransportLayerProtoco
 	
 	func createRoom()
 	{
-		demoView.log("creating...")
+		demoView.log("creating room...")
         client.opJoinOrCreateRoom("Shooter Demo")
 	}
 	
