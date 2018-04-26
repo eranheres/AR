@@ -37,7 +37,10 @@ class StatusViewController: UIViewController {
     
     /// Trigerred when the "Restart Experience" button is tapped.
     var restartExperienceHandler: () -> Void = {}
-    
+
+    /// Trigerred when the "Join" button is tapped.
+    var joinHandler: () -> Void = {}
+
     /// Seconds before the timer message should fade out. Adjust if the app needs longer transient messages.
     private let displayDuration: TimeInterval = 6
     
@@ -48,11 +51,12 @@ class StatusViewController: UIViewController {
     
     // MARK: - Message Handling
 	
-	func showMessage(_ text: String, autoHide: Bool = true) {
+	func showMessage(_ text: String, autoHide: Bool = false) {
         // Cancel any previous hide timer.
         messageHideTimer?.invalidate()
 
         messageLabel.text = text
+        print(text)
 
         // Make sure status is showing.
         setMessageHidden(false, animated: true)
@@ -115,7 +119,10 @@ class StatusViewController: UIViewController {
         restartExperienceHandler()
     }
 	
-	// MARK: - Panel Visibility
+    @IBAction func joinButton(_ sender: Any) {
+        joinHandler()
+    }
+    // MARK: - Panel Visibility
     
 	private func setMessageHidden(_ hide: Bool, animated: Bool) {
         // The panel starts out hidden, so show it before animating opacity.

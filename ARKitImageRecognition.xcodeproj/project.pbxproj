@@ -14,7 +14,47 @@
 		39D8DC1B1E8ADAE600386B05 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 39D8DC1A1E8ADAE600386B05 /* LaunchScreen.storyboard */; };
 		C41366B91EB80DD400EC054A /* StatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41366B81EB80DD400EC054A /* StatusViewController.swift */; };
 		C8C12A711F29277B00B011FE /* ViewController+ARSessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C12A701F29277B00B011FE /* ViewController+ARSessionDelegate.swift */; };
+		D0318B4F208F4BD200E6CD84 /* NetworkLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0318B4D208F4BD200E6CD84 /* NetworkLogic.swift */; };
+		D0318B50208F4BD200E6CD84 /* DemoConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0318B4E208F4BD200E6CD84 /* DemoConstants.swift */; };
+		D0318C58208F959600E6CD84 /* ViewController+PothonDelegateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0318C57208F959600E6CD84 /* ViewController+PothonDelegateView.swift */; };
+		D0318C5B208FD75600E6CD84 /* NetworkApplicationLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0318C5A208FD75600E6CD84 /* NetworkApplicationLayer.swift */; };
+		D0318C5D208FDDBE00E6CD84 /* ARObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0318C5C208FDDBE00E6CD84 /* ARObject.swift */; };
+		D0318C62209070C300E6CD84 /* NetworkTransportLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0318C61209070C300E6CD84 /* NetworkTransportLayer.swift */; };
+		D0318C64209079C000E6CD84 /* ViewController+NetworkDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0318C63209079C000E6CD84 /* ViewController+NetworkDelegate.swift */; };
+		D0318C662091B58900E6CD84 /* SCNNode+drawLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0318C652091B58900E6CD84 /* SCNNode+drawLine.swift */; };
+		D0318C6820920FDF00E6CD84 /* ViewController+LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0318C6720920FDF00E6CD84 /* ViewController+LocationManager.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		D0318C4A208F8AA900E6CD84 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D0318C43208F8AA900E6CD84 /* LoadBalancing-objc.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = FC781CA01346199B0052C26D;
+			remoteInfo = "LoadBalancing-objc-iphone";
+		};
+		D0318C4C208F8AA900E6CD84 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D0318C43208F8AA900E6CD84 /* LoadBalancing-objc.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = FC781CA11346199B0052C26D;
+			remoteInfo = "LoadBalancing-objc-macos";
+		};
+		D0318C4E208F8AA900E6CD84 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D0318C43208F8AA900E6CD84 /* LoadBalancing-objc.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 84B429831BBD933300F993B7;
+			remoteInfo = "LoadBalancing-objc-tvos";
+		};
+		D0318C51208F8AC800E6CD84 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D0318C43208F8AA900E6CD84 /* LoadBalancing-objc.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = FCE239990E9BC5CB00F949F1;
+			remoteInfo = "LoadBalancing-objc-iphone";
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		11063F3B1EBE651B0033EE6D /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -27,8 +67,83 @@
 		39D8DC1A1E8ADAE600386B05 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C41366B81EB80DD400EC054A /* StatusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusViewController.swift; sourceTree = "<group>"; };
 		C8C12A701F29277B00B011FE /* ViewController+ARSessionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+ARSessionDelegate.swift"; sourceTree = "<group>"; };
-		FBC70A90FBC6FF5000000001 /* SampleCode.xcconfig */ = {isa = PBXFileReference; name = SampleCode.xcconfig; path = Configuration/SampleCode.xcconfig; sourceTree = "<group>"; };
-		FE513BF0FE50FDF000000001 /* LICENSE.txt */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE.txt; sourceTree = "<group>"; };
+		D0318B4D208F4BD200E6CD84 /* NetworkLogic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkLogic.swift; sourceTree = "<group>"; };
+		D0318B4E208F4BD200E6CD84 /* DemoConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoConstants.swift; sourceTree = "<group>"; };
+		D0318BDD208F5A8E00E6CD84 /* demo_iPhone_loadBalancing_swift-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "demo_iPhone_loadBalancing_swift-Bridging-Header.h"; sourceTree = "<group>"; };
+		D0318BF6208F826D00E6CD84 /* CustomType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomType.h; sourceTree = "<group>"; };
+		D0318BF7208F826D00E6CD84 /* platformLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = platformLayer.h; sourceTree = "<group>"; };
+		D0318BF8208F826D00E6CD84 /* UTF8String.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UTF8String.h; sourceTree = "<group>"; };
+		D0318BF9208F826D00E6CD84 /* DictionaryBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DictionaryBase.h; sourceTree = "<group>"; };
+		D0318BFA208F826D00E6CD84 /* ToString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToString.h; sourceTree = "<group>"; };
+		D0318BFB208F826D00E6CD84 /* EGTime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EGTime.h; sourceTree = "<group>"; };
+		D0318BFC208F826D00E6CD84 /* Hashtable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Hashtable.h; sourceTree = "<group>"; };
+		D0318BFD208F826D00E6CD84 /* BaseCharString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseCharString.h; sourceTree = "<group>"; };
+		D0318BFE208F826D00E6CD84 /* CustomTypeFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTypeFactory.h; sourceTree = "<group>"; };
+		D0318BFF208F826D00E6CD84 /* JVector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JVector.h; sourceTree = "<group>"; };
+		D0318C00208F826D00E6CD84 /* ValueObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ValueObject.h; sourceTree = "<group>"; };
+		D0318C01208F826D00E6CD84 /* DeSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeSerializer.h; sourceTree = "<group>"; };
+		D0318C03208F826D00E6CD84 /* TypeCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TypeCode.h; sourceTree = "<group>"; };
+		D0318C04208F826D00E6CD84 /* DebugLevel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DebugLevel.h; sourceTree = "<group>"; };
+		D0318C05208F826D00E6CD84 /* KeyObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyObject.h; sourceTree = "<group>"; };
+		D0318C06208F826D00E6CD84 /* JString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JString.h; sourceTree = "<group>"; };
+		D0318C07208F826D00E6CD84 /* defines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = defines.h; sourceTree = "<group>"; };
+		D0318C08208F826D00E6CD84 /* Serializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Serializer.h; sourceTree = "<group>"; };
+		D0318C09208F826D00E6CD84 /* Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
+		D0318C0A208F826D00E6CD84 /* Dictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Dictionary.h; sourceTree = "<group>"; };
+		D0318C0B208F826D00E6CD84 /* platform_definition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = platform_definition.h; sourceTree = "<group>"; };
+		D0318C0E208F826D00E6CD84 /* RawStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RawStorage.h; sourceTree = "<group>"; };
+		D0318C0F208F826D00E6CD84 /* Entry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Entry.h; sourceTree = "<group>"; };
+		D0318C10208F826D00E6CD84 /* Interface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Interface.h; sourceTree = "<group>"; };
+		D0318C11208F826D00E6CD84 /* MemoryPoolManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MemoryPoolManager.h; sourceTree = "<group>"; };
+		D0318C12208F826D00E6CD84 /* DirectAllocator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DirectAllocator.h; sourceTree = "<group>"; };
+		D0318C13208F826D00E6CD84 /* MemoryPool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MemoryPool.h; sourceTree = "<group>"; };
+		D0318C14208F826D00E6CD84 /* Allocate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Allocate.h; sourceTree = "<group>"; };
+		D0318C15208F826D00E6CD84 /* AllocatorInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AllocatorInterface.h; sourceTree = "<group>"; };
+		D0318C16208F826D00E6CD84 /* Object.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Object.h; sourceTree = "<group>"; };
+		D0318C17208F826D00E6CD84 /* porting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = porting.h; sourceTree = "<group>"; };
+		D0318C18208F826D00E6CD84 /* Logger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Logger.h; sourceTree = "<group>"; };
+		D0318C19208F826D00E6CD84 /* CustomTypeBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTypeBase.h; sourceTree = "<group>"; };
+		D0318C1A208F826D00E6CD84 /* BaseListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseListener.h; sourceTree = "<group>"; };
+		D0318C1C208F826D00E6CD84 /* Spinlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Spinlock.h; sourceTree = "<group>"; };
+		D0318C1D208F826D00E6CD84 /* CompileTimeAssertTrue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompileTimeAssertTrue.h; sourceTree = "<group>"; };
+		D0318C1E208F826D00E6CD84 /* TypeName.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TypeName.h; sourceTree = "<group>"; };
+		D0318C1F208F826D00E6CD84 /* IsDerivedFrom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IsDerivedFrom.h; sourceTree = "<group>"; };
+		D0318C20208F826D00E6CD84 /* ToStringImplementation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToStringImplementation.h; sourceTree = "<group>"; };
+		D0318C21208F826D00E6CD84 /* EndianCorrectCastImplementation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EndianCorrectCastImplementation.h; sourceTree = "<group>"; };
+		D0318C22208F826D00E6CD84 /* IsSame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IsSame.h; sourceTree = "<group>"; };
+		D0318C23208F826D00E6CD84 /* ArrayLengthType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArrayLengthType.h; sourceTree = "<group>"; };
+		D0318C24208F826D00E6CD84 /* Data.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Data.h; sourceTree = "<group>"; };
+		D0318C25208F826D00E6CD84 /* KeyToObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyToObject.h; sourceTree = "<group>"; };
+		D0318C26208F826D00E6CD84 /* DeSerializerImplementation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeSerializerImplementation.h; sourceTree = "<group>"; };
+		D0318C27208F826D00E6CD84 /* ConfirmAllowed.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfirmAllowed.h; sourceTree = "<group>"; };
+		D0318C28208F826D00E6CD84 /* ObjectToStringConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectToStringConverter.h; sourceTree = "<group>"; };
+		D0318C29208F826D00E6CD84 /* MathHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MathHelper.h; sourceTree = "<group>"; };
+		D0318C2A208F826D00E6CD84 /* ConfirmAllowedKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfirmAllowedKey.h; sourceTree = "<group>"; };
+		D0318C2B208F826D00E6CD84 /* debug_assert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = debug_assert.h; sourceTree = "<group>"; };
+		D0318C2C208F826D00E6CD84 /* Thread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Thread.h; sourceTree = "<group>"; };
+		D0318C2D208F826D00E6CD84 /* SerializerImplementation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SerializerImplementation.h; sourceTree = "<group>"; };
+		D0318C2E208F826D00E6CD84 /* ValueToObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ValueToObject.h; sourceTree = "<group>"; };
+		D0318C2F208F826D00E6CD84 /* RemoveConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RemoveConst.h; sourceTree = "<group>"; };
+		D0318C30208F826D00E6CD84 /* CustomTypeCallbackWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTypeCallbackWrapper.h; sourceTree = "<group>"; };
+		D0318C31208F826D00E6CD84 /* EnableIf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnableIf.h; sourceTree = "<group>"; };
+		D0318C32208F826D00E6CD84 /* RemovePointer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RemovePointer.h; sourceTree = "<group>"; };
+		D0318C33208F826D00E6CD84 /* SharedPointer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SharedPointer.h; sourceTree = "<group>"; };
+		D0318C34208F826D00E6CD84 /* PrimitiveToStringConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrimitiveToStringConverter.h; sourceTree = "<group>"; };
+		D0318C35208F826D00E6CD84 /* IsPrimitiveType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IsPrimitiveType.h; sourceTree = "<group>"; };
+		D0318C36208F826D00E6CD84 /* Lockguard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Lockguard.h; sourceTree = "<group>"; };
+		D0318C37208F826D00E6CD84 /* EndianCorrectCast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EndianCorrectCast.h; sourceTree = "<group>"; };
+		D0318C38208F826D00E6CD84 /* ANSIString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSIString.h; sourceTree = "<group>"; };
+		D0318C39208F826D00E6CD84 /* Base.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Base.h; sourceTree = "<group>"; };
+		D0318C43208F8AA900E6CD84 /* LoadBalancing-objc.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "LoadBalancing-objc.xcodeproj"; path = "Photon-iOS-Sdk_v4-1-9-0/LoadBalancing-objc/LoadBalancing-objc.xcodeproj"; sourceTree = "<group>"; };
+		D0318C57208F959600E6CD84 /* ViewController+PothonDelegateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+PothonDelegateView.swift"; sourceTree = "<group>"; };
+		D0318C5A208FD75600E6CD84 /* NetworkApplicationLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkApplicationLayer.swift; sourceTree = "<group>"; };
+		D0318C5C208FDDBE00E6CD84 /* ARObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARObject.swift; sourceTree = "<group>"; };
+		D0318C61209070C300E6CD84 /* NetworkTransportLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkTransportLayer.swift; sourceTree = "<group>"; };
+		D0318C63209079C000E6CD84 /* ViewController+NetworkDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+NetworkDelegate.swift"; sourceTree = "<group>"; };
+		D0318C652091B58900E6CD84 /* SCNNode+drawLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SCNNode+drawLine.swift"; sourceTree = "<group>"; };
+		D0318C6720920FDF00E6CD84 /* ViewController+LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+LocationManager.swift"; sourceTree = "<group>"; };
+		FBC70A90FBC6FF5000000001 /* SampleCode.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = SampleCode.xcconfig; path = Configuration/SampleCode.xcconfig; sourceTree = "<group>"; };
+		FE513BF0FE50FDF000000001 /* LICENSE.txt */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,11 +179,16 @@
 		3929C47F1E89EC2C00E00B60 = {
 			isa = PBXGroup;
 			children = (
-				11063F3B1EBE651B0033EE6D /* README.md */,
 				3929C48A1E89EC2C00E00B60 /* ARKitImageRecognition */,
+				D0318BDD208F5A8E00E6CD84 /* demo_iPhone_loadBalancing_swift-Bridging-Header.h */,
+				11063F3B1EBE651B0033EE6D /* README.md */,
+				D0318C43208F8AA900E6CD84 /* LoadBalancing-objc.xcodeproj */,
+				D0318BF5208F826D00E6CD84 /* inc */,
+				D0318B3E208F4AEA00E6CD84 /* libs */,
 				3929C4891E89EC2C00E00B60 /* Products */,
 				FBC70F00FBC7100000000001 /* Configuration */,
 				FE512840FE51281000000001 /* LICENSE */,
+				D0318C3E208F86C200E6CD84 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -84,12 +204,173 @@
 			isa = PBXGroup;
 			children = (
 				3929C48B1E89EC2C00E00B60 /* AppDelegate.swift */,
-				3929C48D1E89EC2C00E00B60 /* ViewController.swift */,
-				C8C12A701F29277B00B011FE /* ViewController+ARSessionDelegate.swift */,
+				D0318C6020906BF900E6CD84 /* ViewController */,
+				D0318C5F20906BE200E6CD84 /* model */,
+				D0318C5E20906BBC00E6CD84 /* Network */,
 				1488324B1EFC3EBF0043E0AB /* Additional View Controllers */,
 				1488324C1EFC3ED00043E0AB /* Resources */,
+				D0318C652091B58900E6CD84 /* SCNNode+drawLine.swift */,
 			);
 			path = ARKitImageRecognition;
+			sourceTree = "<group>";
+		};
+		D0318B3E208F4AEA00E6CD84 /* libs */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = libs;
+			sourceTree = "<group>";
+		};
+		D0318BF5208F826D00E6CD84 /* inc */ = {
+			isa = PBXGroup;
+			children = (
+				D0318BF6208F826D00E6CD84 /* CustomType.h */,
+				D0318BF7208F826D00E6CD84 /* platformLayer.h */,
+				D0318BF8208F826D00E6CD84 /* UTF8String.h */,
+				D0318BF9208F826D00E6CD84 /* DictionaryBase.h */,
+				D0318BFA208F826D00E6CD84 /* ToString.h */,
+				D0318BFB208F826D00E6CD84 /* EGTime.h */,
+				D0318BFC208F826D00E6CD84 /* Hashtable.h */,
+				D0318BFD208F826D00E6CD84 /* BaseCharString.h */,
+				D0318BFE208F826D00E6CD84 /* CustomTypeFactory.h */,
+				D0318BFF208F826D00E6CD84 /* JVector.h */,
+				D0318C00208F826D00E6CD84 /* ValueObject.h */,
+				D0318C01208F826D00E6CD84 /* DeSerializer.h */,
+				D0318C02208F826D00E6CD84 /* Enums */,
+				D0318C05208F826D00E6CD84 /* KeyObject.h */,
+				D0318C06208F826D00E6CD84 /* JString.h */,
+				D0318C07208F826D00E6CD84 /* defines.h */,
+				D0318C08208F826D00E6CD84 /* Serializer.h */,
+				D0318C09208F826D00E6CD84 /* Common.h */,
+				D0318C0A208F826D00E6CD84 /* Dictionary.h */,
+				D0318C0B208F826D00E6CD84 /* platform_definition.h */,
+				D0318C0C208F826D00E6CD84 /* MemoryManagement */,
+				D0318C16208F826D00E6CD84 /* Object.h */,
+				D0318C17208F826D00E6CD84 /* porting.h */,
+				D0318C18208F826D00E6CD84 /* Logger.h */,
+				D0318C19208F826D00E6CD84 /* CustomTypeBase.h */,
+				D0318C1A208F826D00E6CD84 /* BaseListener.h */,
+				D0318C1B208F826D00E6CD84 /* Helpers */,
+				D0318C38208F826D00E6CD84 /* ANSIString.h */,
+				D0318C39208F826D00E6CD84 /* Base.h */,
+			);
+			name = inc;
+			path = "Photon-iOS-Sdk_v4-1-9-0/Common-cpp/inc";
+			sourceTree = "<group>";
+		};
+		D0318C02208F826D00E6CD84 /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				D0318C03208F826D00E6CD84 /* TypeCode.h */,
+				D0318C04208F826D00E6CD84 /* DebugLevel.h */,
+			);
+			path = Enums;
+			sourceTree = "<group>";
+		};
+		D0318C0C208F826D00E6CD84 /* MemoryManagement */ = {
+			isa = PBXGroup;
+			children = (
+				D0318C0D208F826D00E6CD84 /* Internal */,
+				D0318C14208F826D00E6CD84 /* Allocate.h */,
+				D0318C15208F826D00E6CD84 /* AllocatorInterface.h */,
+			);
+			path = MemoryManagement;
+			sourceTree = "<group>";
+		};
+		D0318C0D208F826D00E6CD84 /* Internal */ = {
+			isa = PBXGroup;
+			children = (
+				D0318C0E208F826D00E6CD84 /* RawStorage.h */,
+				D0318C0F208F826D00E6CD84 /* Entry.h */,
+				D0318C10208F826D00E6CD84 /* Interface.h */,
+				D0318C11208F826D00E6CD84 /* MemoryPoolManager.h */,
+				D0318C12208F826D00E6CD84 /* DirectAllocator.h */,
+				D0318C13208F826D00E6CD84 /* MemoryPool.h */,
+			);
+			path = Internal;
+			sourceTree = "<group>";
+		};
+		D0318C1B208F826D00E6CD84 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				D0318C1C208F826D00E6CD84 /* Spinlock.h */,
+				D0318C1D208F826D00E6CD84 /* CompileTimeAssertTrue.h */,
+				D0318C1E208F826D00E6CD84 /* TypeName.h */,
+				D0318C1F208F826D00E6CD84 /* IsDerivedFrom.h */,
+				D0318C20208F826D00E6CD84 /* ToStringImplementation.h */,
+				D0318C21208F826D00E6CD84 /* EndianCorrectCastImplementation.h */,
+				D0318C22208F826D00E6CD84 /* IsSame.h */,
+				D0318C23208F826D00E6CD84 /* ArrayLengthType.h */,
+				D0318C24208F826D00E6CD84 /* Data.h */,
+				D0318C25208F826D00E6CD84 /* KeyToObject.h */,
+				D0318C26208F826D00E6CD84 /* DeSerializerImplementation.h */,
+				D0318C27208F826D00E6CD84 /* ConfirmAllowed.h */,
+				D0318C28208F826D00E6CD84 /* ObjectToStringConverter.h */,
+				D0318C29208F826D00E6CD84 /* MathHelper.h */,
+				D0318C2A208F826D00E6CD84 /* ConfirmAllowedKey.h */,
+				D0318C2B208F826D00E6CD84 /* debug_assert.h */,
+				D0318C2C208F826D00E6CD84 /* Thread.h */,
+				D0318C2D208F826D00E6CD84 /* SerializerImplementation.h */,
+				D0318C2E208F826D00E6CD84 /* ValueToObject.h */,
+				D0318C2F208F826D00E6CD84 /* RemoveConst.h */,
+				D0318C30208F826D00E6CD84 /* CustomTypeCallbackWrapper.h */,
+				D0318C31208F826D00E6CD84 /* EnableIf.h */,
+				D0318C32208F826D00E6CD84 /* RemovePointer.h */,
+				D0318C33208F826D00E6CD84 /* SharedPointer.h */,
+				D0318C34208F826D00E6CD84 /* PrimitiveToStringConverter.h */,
+				D0318C35208F826D00E6CD84 /* IsPrimitiveType.h */,
+				D0318C36208F826D00E6CD84 /* Lockguard.h */,
+				D0318C37208F826D00E6CD84 /* EndianCorrectCast.h */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		D0318C3E208F86C200E6CD84 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D0318C44208F8AA900E6CD84 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D0318C4B208F8AA900E6CD84 /* libLoadBalancing-objc_debug_iphoneos.a */,
+				D0318C4D208F8AA900E6CD84 /* libLoadBalancing-objc_debug_macosx.a */,
+				D0318C4F208F8AA900E6CD84 /* libLoadBalancing-objc_debug_appletvos.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D0318C5E20906BBC00E6CD84 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				D0318C5A208FD75600E6CD84 /* NetworkApplicationLayer.swift */,
+				D0318C61209070C300E6CD84 /* NetworkTransportLayer.swift */,
+				D0318B4E208F4BD200E6CD84 /* DemoConstants.swift */,
+				D0318B4D208F4BD200E6CD84 /* NetworkLogic.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		D0318C5F20906BE200E6CD84 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				D0318C5C208FDDBE00E6CD84 /* ARObject.swift */,
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		D0318C6020906BF900E6CD84 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				3929C48D1E89EC2C00E00B60 /* ViewController.swift */,
+				C8C12A701F29277B00B011FE /* ViewController+ARSessionDelegate.swift */,
+				D0318C57208F959600E6CD84 /* ViewController+PothonDelegateView.swift */,
+				D0318C63209079C000E6CD84 /* ViewController+NetworkDelegate.swift */,
+				D0318C6720920FDF00E6CD84 /* ViewController+LocationManager.swift */,
+			);
+			path = ViewController;
 			sourceTree = "<group>";
 		};
 		FBC70F00FBC7100000000001 /* Configuration */ = {
@@ -105,7 +386,6 @@
 			children = (
 				FE513BF0FE50FDF000000001 /* LICENSE.txt */,
 			);
-			name = LICENSE;
 			path = LICENSE;
 			sourceTree = "<group>";
 		};
@@ -119,11 +399,11 @@
 				3929C4841E89EC2C00E00B60 /* Sources */,
 				3929C4851E89EC2C00E00B60 /* Frameworks */,
 				3929C4861E89EC2C00E00B60 /* Resources */,
-				39DE40221EAF1CD30064C94C,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				D0318C52208F8AC800E6CD84 /* PBXTargetDependency */,
 			);
 			name = ARKitImageRecognition;
 			productName = ARKitImageRecognition;
@@ -142,6 +422,7 @@
 				TargetAttributes = {
 					3929C4871E89EC2C00E00B60 = {
 						CreatedOnToolsVersion = 9.0;
+						DevelopmentTeam = WJ9V9R8MQT;
 						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 					};
@@ -158,12 +439,42 @@
 			mainGroup = 3929C47F1E89EC2C00E00B60;
 			productRefGroup = 3929C4891E89EC2C00E00B60 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = D0318C44208F8AA900E6CD84 /* Products */;
+					ProjectRef = D0318C43208F8AA900E6CD84 /* LoadBalancing-objc.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				3929C4871E89EC2C00E00B60 /* ARKitImageRecognition */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		D0318C4B208F8AA900E6CD84 /* libLoadBalancing-objc_debug_iphoneos.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libLoadBalancing-objc_debug_iphoneos.a";
+			remoteRef = D0318C4A208F8AA900E6CD84 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		D0318C4D208F8AA900E6CD84 /* libLoadBalancing-objc_debug_macosx.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libLoadBalancing-objc_debug_macosx.a";
+			remoteRef = D0318C4C208F8AA900E6CD84 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		D0318C4F208F8AA900E6CD84 /* libLoadBalancing-objc_debug_appletvos.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libLoadBalancing-objc_debug_appletvos.a";
+			remoteRef = D0318C4E208F8AA900E6CD84 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		3929C4861E89EC2C00E00B60 /* Resources */ = {
@@ -183,14 +494,31 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D0318C62209070C300E6CD84 /* NetworkTransportLayer.swift in Sources */,
+				D0318C58208F959600E6CD84 /* ViewController+PothonDelegateView.swift in Sources */,
+				D0318C5D208FDDBE00E6CD84 /* ARObject.swift in Sources */,
+				D0318B50208F4BD200E6CD84 /* DemoConstants.swift in Sources */,
+				D0318C662091B58900E6CD84 /* SCNNode+drawLine.swift in Sources */,
 				3929C48E1E89EC2C00E00B60 /* ViewController.swift in Sources */,
+				D0318C64209079C000E6CD84 /* ViewController+NetworkDelegate.swift in Sources */,
 				C41366B91EB80DD400EC054A /* StatusViewController.swift in Sources */,
 				C8C12A711F29277B00B011FE /* ViewController+ARSessionDelegate.swift in Sources */,
+				D0318B4F208F4BD200E6CD84 /* NetworkLogic.swift in Sources */,
+				D0318C5B208FD75600E6CD84 /* NetworkApplicationLayer.swift in Sources */,
 				3929C48C1E89EC2C00E00B60 /* AppDelegate.swift in Sources */,
+				D0318C6820920FDF00E6CD84 /* ViewController+LocationManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D0318C52208F8AC800E6CD84 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "LoadBalancing-objc-iphone";
+			targetProxy = D0318C51208F8AC800E6CD84 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		3929C48F1E89EC2C00E00B60 /* Main.storyboard */ = {
@@ -323,15 +651,35 @@
 				CODE_SIGN_IDENTITY = "-";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
-				INFOPLIST_FILE = "$(SRCROOT)/ARKitImageRecognition/Resources/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = (
+				DEVELOPMENT_TEAM = WJ9V9R8MQT;
+				HEADER_SEARCH_PATHS = (
+					"./Photon-iOS-Sdk_v4-1-9-0/**",
 					"$(inherited)",
-					"@executable_path/Frameworks",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					../,
+					"./**",
+				);
+				INFOPLIST_FILE = "$(SRCROOT)/ARKitImageRecognition/Resources/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Photon-iOS-Sdk_v4-1-9-0/LoadBalancing-objc/lib",
+					"./Photon-iOS-Sdk_v4-1-9-0/Common-objc/lib",
+					"./Photon-iOS-Sdk_v4-1-9-0/Photon-objc/lib",
+					"./Photon-iOS-Sdk_v4-1-9-0/LoadBalancing-objc/lib",
+				);
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-lstdc++",
+					"-lCommon-objc_$(CONFIGURATION)_$(PLATFORM_NAME)",
+					"-lPhoton-objc_$(CONFIGURATION)_$(PLATFORM_NAME)",
+					"-lLoadBalancing-objc_$(CONFIGURATION)_$(PLATFORM_NAME)",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.example.apple-samplecode.arkit-image-recognition${SAMPLE_CODE_DISAMBIGUATOR}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "demo_iPhone_loadBalancing_swift-Bridging-Header.h";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
 			};
@@ -346,15 +694,35 @@
 				CODE_SIGN_IDENTITY = "-";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
-				INFOPLIST_FILE = "$(SRCROOT)/ARKitImageRecognition/Resources/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = (
+				DEVELOPMENT_TEAM = WJ9V9R8MQT;
+				HEADER_SEARCH_PATHS = (
+					"./Photon-iOS-Sdk_v4-1-9-0/**",
 					"$(inherited)",
-					"@executable_path/Frameworks",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					../,
+					"./**",
+				);
+				INFOPLIST_FILE = "$(SRCROOT)/ARKitImageRecognition/Resources/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Photon-iOS-Sdk_v4-1-9-0/LoadBalancing-objc/lib",
+					"./Photon-iOS-Sdk_v4-1-9-0/Common-objc/lib",
+					"./Photon-iOS-Sdk_v4-1-9-0/Photon-objc/lib",
+					"./Photon-iOS-Sdk_v4-1-9-0/LoadBalancing-objc/lib",
+				);
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-lstdc++",
+					"-lCommon-objc_$(CONFIGURATION)_$(PLATFORM_NAME)",
+					"-lPhoton-objc_$(CONFIGURATION)_$(PLATFORM_NAME)",
+					"-lLoadBalancing-objc_$(CONFIGURATION)_$(PLATFORM_NAME)",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.example.apple-samplecode.arkit-image-recognition${SAMPLE_CODE_DISAMBIGUATOR}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "demo_iPhone_loadBalancing_swift-Bridging-Header.h";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
 			};
