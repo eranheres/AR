@@ -29,10 +29,13 @@ extension ViewController:  CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
-        trueHeading = newHeading.trueHeading
+        trueHeading = newHeading
         let heading = newHeading.trueHeading
         let accuracy = newHeading.headingAccuracy
-        print("accuracy:\(accuracy) heading:\(heading);\(heading.degreesToRadians)")
+        if (accuracy > 45) {
+            print("bad north accuracy:\(accuracy) heading:\(heading);\(heading.degreesToRadians)")
+        }
+        
         // self.statusViewController.showMessage("North: acc:\(accuracy) heading:\(heading)")
     }
 }

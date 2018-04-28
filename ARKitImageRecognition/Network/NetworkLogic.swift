@@ -81,7 +81,7 @@ class PhotonListener : NSObject, EGLoadBalancingListener
 	// events, triggered by certain operations of all players in the same room
 	func joinRoomEventAction(_ playerNr : Int32, _ playernrs : EGArray!, _ player : EGLoadBalancingPlayer!) -> Void
 	{
-		self.delegateView.log(String(format: "- joinRoomEventAction: %d %@ %@", playerNr, playernrs, player ))
+		self.delegateView.log(String(format: "- joinRoomEventAction: %d", playerNr ))
 		networkLogic.updateState()
 	}
 	
@@ -186,7 +186,6 @@ class NetworkLogic : NetworkTransportLayerDelegate, NetworkTransportLayerProtoco
         listenerRef.delegateTransportLayer = self
 		self.client = EGLoadBalancingClient(client : listenerRef, appId, appVersion)
 		self.client.debugOutputLevel = EGDebugLevel_WARNINGS
-		client.connect();
 	}
     
     func handleRx(messageId: UInt8, message: String) {
@@ -212,7 +211,7 @@ class NetworkLogic : NetworkTransportLayerDelegate, NetworkTransportLayerProtoco
 	
 	func createRoom()
 	{
-		demoView.log("creating room...")
+        demoView.log("Photon: creating room...")
         client.opJoinOrCreateRoom("Shooter Demo")
 	}
 	
@@ -228,7 +227,12 @@ class NetworkLogic : NetworkTransportLayerDelegate, NetworkTransportLayerProtoco
 		{
 			stateStr = PeerStatesStr[Int(client.state)]
 		}
-		demoView.showState(Int(client.state), stateStr : String(format : "StateStr[%@/%d]", stateStr, client.state), roomName : room, playerNr : client.localPlayer.number, inLobby : client.isInLobby, inRoom : client.isInGameRoom)
+        var localPlayerNum :Int32 = -1
+        if (client.localPlayer != nil) {
+            localPlayerNum = client.localPlayer.number
+        }
+        
+		demoView.showState(Int(client.state), stateStr : String(format : "StateStr[%@/%d]", stateStr, client.state), roomName : room, playerNr : localPlayerNum, inLobby : client.isInLobby, inRoom : client.isInGameRoom)
 	}
     
     func joinRandomRoom() {

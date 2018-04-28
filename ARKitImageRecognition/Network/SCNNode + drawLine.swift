@@ -1,23 +1,13 @@
 //
-//  SCNNode+drawLine.swift
-//  ARKitImageRecognition
+//  SCNNode + drawLine.swift
+//  ARTest4
 //
-//  Created by Eran Heres on 26/04/2018.
-//  Copyright © 2018 Apple. All rights reserved.
+//  Created by Eran Heres on 28/04/2018.
+//  Copyright © 2018 Eran Heres. All rights reserved.
 //
 
 import Foundation
 import SceneKit
-
-func normalizeVector(_ iv: SCNVector3) -> SCNVector3 {
-    let length = sqrt(iv.x * iv.x + iv.y * iv.y + iv.z * iv.z)
-    if length == 0 {
-        return SCNVector3(0.0, 0.0, 0.0)
-    }
-    
-    return SCNVector3( iv.x / length, iv.y / length, iv.z / length)
-    
-}
 
 extension SCNNode {
     
@@ -55,7 +45,8 @@ extension SCNNode {
         let av = SCNVector3( (ov.x + nv.x)/2.0, (ov.y+nv.y)/2.0, (ov.z+nv.z)/2.0)
         
         //normalized axis vector
-        let av_normalized = normalizeVector(av)
+        
+        let av_normalized = SCNVector3(normalize(float3(av)))
         let q0 = Float(0.0) //cos(angel/2), angle is always 180 or M_PI
         let q1 = Float(av_normalized.x) // x' * sin(angle/2)
         let q2 = Float(av_normalized.y) // y' * sin(angle/2)
@@ -93,3 +84,5 @@ extension SCNNode {
         return self
     }
 }
+
+//extension ended.

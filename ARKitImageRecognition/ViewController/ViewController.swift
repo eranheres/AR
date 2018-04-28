@@ -19,6 +19,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     private var posMessageTimer: Timer?
     var networkLogic: NetworkLogic?
     var netAppLayer: NetworkApplicationLayer?
+    var handshakeSequence : HandshakeSequence?
 
     
     private var uiImage = UIImage(named:"iPhone X")
@@ -27,13 +28,14 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     
     private var isDuringJoinSequence = false
     let locationManager = CLLocationManager()
-    var trueHeading : CLLocationDirection?
+    var trueHeading : CLHeading?
     let playerName = UUID().uuidString
     
     /// The view controller that displays the status and "restart experience" UI.
     lazy var statusViewController: StatusViewController = {
         return childViewControllers.lazy.flatMap({ $0 as? StatusViewController }).first!
     }()
+
     
     /// A serial queue for thread safety when modifying the SceneKit node graph.
     let updateQueue = DispatchQueue(label: Bundle.main.bundleIdentifier! + ".serialSceneKitQueue")
@@ -51,18 +53,20 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         sceneView.session.delegate = self
         
         // Hook up status view controller callback(s).
-        statusViewController.restartExperienceHandler = { [unowned self] in
-            self.restartExperience()
+        statusViewController.restartExperienceHandler = { [unowned self] in          self.restartExperience() }
+        statusViewController.joinHandler = { [unowned self] in self.startJoinSequence() }
+        statusViewController.handshakeHandler = { [unowned self] in
+            self.startHandshake()
         }
-        statusViewController.joinHandler = { [unowned self] in
-            self.startJoinSequence()
-        }
+        
         // Add tap gesture
         addTapGestureToSceneView()
         // Start network
         startNetwork()
         // Start location
         initLocationManager()
+        // Start handshake sequence
+        handshakeSequence = HandshakeSequence(delegate: self)
         
     }
     
@@ -96,8 +100,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             return
         }
         isDuringJoinSequence = true
-        guard let cam = getCameraPosition() else { return }
-        let transform = SCNMatrix4MakeTranslation(cam.x, cam.y, cam.z)
+        guard let camPos = self.getCameraVectors()?.position else { return }
+        let transform = SCNMatrix4MakeTranslation(camPos.x, camPos.y, camPos.z)
         session.setWorldOrigin(relativeTransform: float4x4.init(transform))
 
         loadImage()
@@ -119,7 +123,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         resetTracking()
         
         posMessageTimer = Timer.scheduledTimer(
-                            timeInterval:0.05,
+                            timeInterval:2,
                             target: self,
                             selector: #selector(ViewController.sendCameraPos),
                             userInfo: nil,
@@ -137,12 +141,9 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     var cameraNode : SCNNode?
     
     @objc func sendCameraPos() {
-        guard let camPos = self.getCameraPosition() else { return }
-        let obj = ARObject(uuid: "camera-"+playerName, vector: camPos)
+        guard let obj = self.getCameraVectors() else { return }
         netAppLayer?.sendCameraMessage(camera: obj)
-        // let s = String(format: "Pos:[%.2f,%.2f,%.2f]",camPos.x,camPos.y,camPos.z)
-        //self.statusViewController.showMessage(s)
-        // print(s)
+       // print("\(camDir)")
     }
     // MARK: - Session management (Image detection setup)
     
@@ -235,17 +236,37 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         ])
     }
     
-    private func getCameraPosition() -> SCNVector3? {
-        guard let pointOfView = sceneView.pointOfView else { return nil }
-        let transform = pointOfView.transform
-        let location = SCNVector3(transform.m41, transform.m42, transform.m43)
-        return location
+    func getCameraVectors() -> CamObject? { // (direction, position)
+        if let frame = self.sceneView.session.currentFrame {
+            let mat = SCNMatrix4(frame.camera.transform) // 4x4 transform matrix describing camera in world space
+            let dir = SCNVector3(-1 * mat.m31, -1 * mat.m32, -1 * mat.m33) // orientation of camera in world space
+            let pos = SCNVector3(mat.m41, mat.m42, mat.m43) // location of camera in world space
+            let eulerAngles = frame.camera.eulerAngles
+            let angle = SCNVector3(eulerAngles.x, eulerAngles.y, eulerAngles.z)
+            return CamObject(player:"", pos:pos, dir:dir, angle:angle)
+        }
+        return nil
     }
     
     func addTapGestureToSceneView() {
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ViewController.didTap(withGestureRecognizer:)))
-        sceneView.addGestureRecognizer(tapGestureRecognizer)
+        sceneView.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(ViewController.handleLongPress(gestureReconizer:))))
+    
+        sceneView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(ViewController.didTap(withGestureRecognizer:))))
     }
+    
+    var touchStart : Date?
+    @objc func handleLongPress(gestureReconizer: UILongPressGestureRecognizer) {
+        if gestureReconizer.state != UIGestureRecognizerState.ended {
+            if touchStart == nil {
+                touchStart = Date()
+            }
+            return
+        }
+        guard let time = touchStart?.timeIntervalSinceNow else { return }
+        touchStart = nil
+        throwBall(Float(-time))
+    }
+        
 
     /*
     func moveWorldOriginBy(x: GLfloat, y: GLfloat, z: GLfloat) {
@@ -283,6 +304,30 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
     }
     
+    func throwBall(_ distance : Float) {
+        guard let currentFrame = sceneView.session.currentFrame else { return }
+        let ballNode = SCNNode()
+        let ball = SCNSphere(radius: 0.1)
+        ball.materials = boxColor()
+        ballNode.geometry = ball
+        ballNode.physicsBody = SCNPhysicsBody(type: .dynamic, shape: nil)
+        
+        // Ball start position
+        var translation = matrix_identity_float4x4
+        translation.columns.3.z = -1.0
+        let transform = simd_mul(currentFrame.camera.transform,translation)
+        ballNode.transform = SCNMatrix4(transform)
+        
+        // Force direction & position
+        translation.columns.3.z = Float(-distance*10)
+        let tf = simd_mul(currentFrame.camera.transform,translation)
+        let force = SCNVector3(x: tf.columns.3.x, y: tf.columns.3.y , z: tf.columns.3.z)
+        let position = SCNVector3(x: 0.00, y: 0.00, z: 0.00)
+
+        ballNode.physicsBody?.applyForce(force, at: position, asImpulse: true)
+        sceneView.scene.rootNode.addChildNode(ballNode)
+    }
+    
     func addBoxOnTouch() {
         if let currentFrame = sceneView.session.currentFrame {
             var translation = matrix_identity_float4x4
@@ -315,6 +360,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         boxNode.geometry = box
         boxNode.name = id
         boxNode.transform = transform
+        boxNode.physicsBody = SCNPhysicsBody(type: .dynamic, shape: nil)
+        boxNode.physicsBody?.isAffectedByGravity = false
         sceneView.scene.rootNode.addChildNode(boxNode)
         return boxNode
     }
@@ -331,9 +378,16 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     }
     
     func addAxisWorldOrigin() {
-        addBoxForAxis(width: 0.50, height: 0.01, length: 0.01)
-        addBoxForAxis(width: 0.01, height: 0.50, length: 0.01)
-        addBoxForAxis(width: 0.01, height: 0.01, length: 0.50)
+        let twoPointsNodeZ = SCNNode()
+        sceneView.scene.rootNode.addChildNode(twoPointsNodeZ.buildLineInTwoPointsWithRotation(
+            from: SCNVector3(0,0,0), to: SCNVector3(0,0,0.5), radius: 0.005, color: .red))
+        let twoPointsNodeY = SCNNode()
+        sceneView.scene.rootNode.addChildNode(twoPointsNodeY.buildLineInTwoPointsWithRotation(
+            from: SCNVector3(0,0,0), to: SCNVector3(0,0.5,0), radius: 0.005, color: .cyan))
+        let twoPointsNodeX = SCNNode()
+        sceneView.scene.rootNode.addChildNode(twoPointsNodeX.buildLineInTwoPointsWithRotation(
+            from: SCNVector3(0,0,0), to: SCNVector3(0.5,0,0), radius: 0.005, color: .yellow))
     }
+    
     
 }

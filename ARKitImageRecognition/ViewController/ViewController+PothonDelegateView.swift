@@ -12,7 +12,7 @@ import Foundation
 extension ViewController: PhotonDelegateView {
         
     func log(_ s: String) {
-        print(s)
+        print("Photon: "+s)
     }
     
     func showState(_ state: Int, stateStr: String, roomName: String, playerNr: Int32, inLobby: Bool, inRoom: Bool) {

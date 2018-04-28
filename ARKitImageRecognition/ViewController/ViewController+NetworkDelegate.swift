@@ -17,7 +17,7 @@ extension ViewController: NetworkApplicationLayerDelegate {
         self.netAppLayer = NetworkApplicationLayer(delegate: self)
         networkLogic = NetworkLogic(demoView : self, networkApplicationLayer: netAppLayer!)
         Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(ViewController.service), userInfo: nil, repeats: true)
-        Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(ViewController.broadcastObjectsLocation), userInfo: nil, repeats: true)
+        Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(ViewController.broadcastObjectsLocation), userInfo: nil, repeats: true)
 
         networkLogic?.updateState()
     }
@@ -26,9 +26,13 @@ extension ViewController: NetworkApplicationLayerDelegate {
     {
         guard let netLogic = networkLogic else {return}
         guard let clnt = netLogic.client else {return}
-        
+        let validStates :[Int32] = [2, 3, 4, 5, 6, 8, 10, 11, 12, 13, 14, 15, 16]
         if clnt.isInLobby && !clnt.isInGameRoom {
             netLogic.createRoom()
+        } else if (clnt.state == 1) {   // PeerCreated
+            netLogic.connect()   
+        } else if (!validStates.contains(clnt.state)) {
+            print("Photon: unknown state")
         }
         netLogic.service()
     }
@@ -45,19 +49,20 @@ extension ViewController: NetworkApplicationLayerDelegate {
 
     //////    Camera location
     
-    func sendCameraMessage(camera: ARObject) {
+    func sendCameraMessage(camera: CamObject) {
         netAppLayer?.sendCameraMessage(camera: camera)
     }
     
-    func receiveCameraMessage(_ camera: ARObject) {
+    func receiveCameraMessage(_ camera: CamObject) {
         let existingNodes = sceneView.scene.rootNode.childNodes
-        let vec = camera.vector
-        if let node = existingNodes.first(where: { $0.name == camera.uuid }) {
-            let moveTo = SCNAction.move(to: vec, duration: 0.1)
+        let camPos = camera.position
+        if let node = existingNodes.first(where: { $0.name == camera.player }) {
+            let moveTo = SCNAction.move(to: camPos, duration: 0.1)
             node.runAction(moveTo)
         } else {
-            _ = addBoxOnTransform(id: camera.uuid, transform: vec.transform)
+            _ = addBoxOnTransform(id: camera.player, transform: camPos.transform)
         }
+        self.handshakeApplyCameraInfo(camera: camera)
     }
 
     

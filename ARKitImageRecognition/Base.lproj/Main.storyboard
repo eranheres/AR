@@ -82,7 +82,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c8N-Zn-tFz" userLabel="JoinButton">
-                                <rect key="frame" x="264" y="31" width="22" height="22"/>
+                                <rect key="frame" x="264" y="10" width="22" height="22"/>
                                 <connections>
                                     <action selector="joinButton:" destination="ri3-7p-e6d" eventType="touchUpInside" id="L36-Xk-9mB"/>
                                 </connections>
@@ -144,6 +144,7 @@
                             </containerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="R5W-V8-6lY" secondAttribute="trailing" id="J42-1v-Ihf"/>
                             <constraint firstItem="tnx-rc-95S" firstAttribute="top" secondItem="GBj-4O-Whc" secondAttribute="top" id="Sdx-fT-fqG"/>
