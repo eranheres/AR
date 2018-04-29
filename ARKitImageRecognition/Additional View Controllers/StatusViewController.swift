@@ -43,6 +43,8 @@ class StatusViewController: UIViewController {
     
     /// Trigerred when the "Handshake" button is tapped.
     var handshakeHandler: () -> Void = {}
+    
+    var errorHandler: ErrorHandler?
 
 
     /// Seconds before the timer message should fade out. Adjust if the app needs longer transient messages.
@@ -53,9 +55,14 @@ class StatusViewController: UIViewController {
     
     private var timers: [MessageType: Timer] = [:]
     
+    
+   
     // MARK: - Message Handling
-	
-	func showMessage(_ text: String, autoHide: Bool = false) {
+    func errorHandlerDelegate(text: String) {
+        showMsg(text, autoHide: false)
+    }
+    
+	func showMsg(_ text: String, autoHide: Bool = false) {
         // Cancel any previous hide timer.
         messageHideTimer?.invalidate()
 
@@ -71,8 +78,8 @@ class StatusViewController: UIViewController {
             })
         }
 	}
-    
-	func scheduleMessage(_ text: String, inSeconds seconds: TimeInterval, messageType: MessageType) {
+/*
+	func scheduleMsg(_ text: String, inSeconds seconds: TimeInterval, messageType: MessageType) {
         cancelScheduledMessage(for: messageType)
 
         let timer = Timer.scheduledTimer(withTimeInterval: seconds, repeats: false, block: { [weak self] timer in
@@ -82,24 +89,34 @@ class StatusViewController: UIViewController {
 
         timers[messageType] = timer
 	}
-    
-    func cancelScheduledMessage(for messageType: MessageType) {
+
+    func cancelScheduledMsg(for messageType: MessageType) {
         timers[messageType]?.invalidate()
         timers[messageType] = nil
     }
 
-    func cancelAllScheduledMessages() {
+    func cancelAllScheduledMsgs() {
         for messageType in MessageType.all {
             cancelScheduledMessage(for: messageType)
         }
     }
     
     // MARK: - ARKit
+*/
+    
     
 	func showTrackingQualityInfo(for trackingState: ARCamera.TrackingState, autoHide: Bool) {
-		showMessage(trackingState.presentationString, autoHide: autoHide)
+        switch trackingState {
+        case .normal :
+            errorHandler?.reportOK(module: .ar)
+            return
+            
+        default: do {}
+        }
+        errorHandler?.reportError(module: .ar, str: trackingState.presentationString)
+//		showMsg(trackingState.presentationString, autoHide: autoHide)
 	}
-	
+/*
 	func escalateFeedback(for trackingState: ARCamera.TrackingState, inSeconds seconds: TimeInterval) {
         cancelScheduledMessage(for: .trackingStateEscalation)
 
@@ -116,7 +133,7 @@ class StatusViewController: UIViewController {
 
         timers[.trackingStateEscalation] = timer
     }
-    
+*/
     // MARK: - IBActions
     
     @IBAction private func restartExperience(_ sender: UIButton) {

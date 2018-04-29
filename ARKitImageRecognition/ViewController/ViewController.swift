@@ -58,9 +58,9 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         // Hook up status view controller callback(s).
         statusViewController.restartExperienceHandler = { [unowned self] in          self.restartExperience() }
         statusViewController.joinHandler = { [unowned self] in self.startJoinSequence() }
-        statusViewController.handshakeHandler = { [unowned self] in
-            self.startHandshake()
-        }
+        statusViewController.handshakeHandler = { [unowned self] in self.startHandshake() }
+        statusViewController.errorHandler = ErrorHandler(delegate: self.statusViewController.errorHandlerDelegate)
+
         
         // Add tap gesture
         addTapGestureToSceneView()
@@ -157,7 +157,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     /// - Tag: ARReferenceImage-Loading
 	func resetTracking() {
         guard ARWorldTrackingConfiguration.isSupported else {
-            statusViewController.showMessage("AR not supported, work for debug mode")
+            statusViewController.errorHandler?.reportError(module: .ar, str: "AR not supported, work for debug mode")
             return
         }
         guard let referenceImages = ARReferenceImage.referenceImages(inGroupNamed: "AR Resources", bundle: nil) else {
@@ -172,8 +172,18 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         session.run(configuration, options: [.resetTracking, .removeExistingAnchors])
 
         self.addAxisWorldOrigin()
-        self.statusViewController.showMessage("Reseting world origin")
-        statusViewController.scheduleMessage("Look around to detect images", inSeconds: 7.5, messageType: .contentPlacement)
+        statusViewController.errorHandler?.reportError(module: .ar, str: "Reseting AR session")
+        
+        posMessageTimer = Timer.scheduledTimer(
+            timeInterval:0.1,
+            target: self,
+            selector: #selector(ViewController.sendCameraPos),
+            userInfo: nil,
+            repeats: true)
+        Timer.scheduledTimer(withTimeInterval: 7.5, repeats: false, block: {_ in
+            self.statusViewController.errorHandler?.reportOK(module: .ar)
+        })
+        //statusViewController.scheduleMessage("Look around to detect images", inSeconds: 7.5, messageType: .contentPlacement)
         
 	}
 
@@ -204,12 +214,13 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             // Add the plane visualization to the scene.
             node.addChildNode(boxNode)
         }
-        
+        /*
         DispatchQueue.main.async {
             let imageName = referenceImage.name ?? ""
             self.statusViewController.cancelAllScheduledMessages()
             self.statusViewController.showMessage("Detected image “\(imageName)”")
         }
+        */
     }
     
     func renderPlane(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for planeAnchor: ARPlaneAnchor) {
@@ -302,26 +313,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         touchStart = nil
         throwBall(Float(-time))
     }
-        
-
-    /*
-    func moveWorldOriginBy(x: GLfloat, y: GLfloat, z: GLfloat) {
-        // First let's get the current boxNode transformation matrix
-        SCNMatrix4 boxTransform = boxNode.transform;
-        
-        // Let's make a new matrix for translation +2 along X axis
-        SCNMatrix4 xTranslation = SCNMatrix4MakeTranslation(2, 0, 0);
-        
-        // Combine the two matrices, THE ORDER MATTERS !
-        // if you swap the parameters you will move it in parent's coord system
-        SCNMatrix4 newTransform = SCNMatrix4Mult(xTranslation, boxTransform);
-        
-        // Allply the newly generated transform
-        boxNode.transform = newTransform;
-        
-        session.setWorldOrigin(relativeTransform: float4x4.init(transform))
-    }
-    */
+    
     @objc func didTap(withGestureRecognizer recognizer: UIGestureRecognizer) {
         let tapLocation = recognizer.location(in: sceneView)
         let hitTestResults = sceneView.hitTest(tapLocation)
@@ -337,7 +329,6 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         _ = addBoxOnTransform(id: "obj-"+UUID().uuidString, transform: SCNMatrix4MakeTranslation(x,y,z))
 
 /*
-
         let node = hitTestResult.node
         if let _ = node.geometry as? SCNPlane {
             return

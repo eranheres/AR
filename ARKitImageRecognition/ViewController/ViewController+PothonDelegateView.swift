@@ -25,7 +25,11 @@ extension ViewController: PhotonDelegateView {
         {
             str = String("Network:"+stateStr)
         }
-        statusViewController.showMessage(str)
+        if (state == 15) {
+            statusViewController.errorHandler?.reportOK(module: .connection)
+        } else {
+            statusViewController.errorHandler?.reportError(module: .connection, str: str)
+        }
         log(str)
     }
     

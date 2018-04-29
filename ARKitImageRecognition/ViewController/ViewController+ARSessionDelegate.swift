@@ -13,13 +13,6 @@ extension ViewController: ARSessionDelegate {
     
     func session(_ session: ARSession, cameraDidChangeTrackingState camera: ARCamera) {
         statusViewController.showTrackingQualityInfo(for: camera.trackingState, autoHide: true)
-        
-        switch camera.trackingState {
-        case .notAvailable, .limited:
-            statusViewController.escalateFeedback(for: camera.trackingState, inSeconds: 3.0)
-        case .normal:
-            statusViewController.cancelScheduledMessage(for: .trackingStateEscalation)
-        }
     }
     
     func session(_ session: ARSession, didFailWithError error: Error) {
@@ -42,15 +35,12 @@ extension ViewController: ARSessionDelegate {
     
     func sessionWasInterrupted(_ session: ARSession) {
         blurView.isHidden = false
-        statusViewController.showMessage("""
-        SESSION INTERRUPTED
-        The session will be reset after the interruption has ended.
-        """, autoHide: false)
+        statusViewController.errorHandler?.reportError(module: .ar, str: "SESSION INTERRUPTED The session will be reset after the interruption has ended.")
     }
     
     func sessionInterruptionEnded(_ session: ARSession) {
         blurView.isHidden = true
-        statusViewController.showMessage("RESETTING SESSION")
+        statusViewController.errorHandler?.reportError(module: .ar, str:"RESETTING SESSION")
         
         restartExperience()
     }
@@ -82,7 +72,7 @@ extension ViewController: ARSessionDelegate {
         guard isRestartAvailable else { return }
         isRestartAvailable = false
         
-        statusViewController.cancelAllScheduledMessages()
+        // statusViewController.cancelAllScheduledMessages()
         
         resetTracking()
         

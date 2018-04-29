@@ -30,9 +30,14 @@ extension ViewController: NetworkApplicationLayerDelegate {
         if clnt.isInLobby && !clnt.isInGameRoom {
             netLogic.createRoom()
         } else if (clnt.state == 1) {   // PeerCreated
-            netLogic.connect()   
+            netLogic.connect()
         } else if (!validStates.contains(clnt.state)) {
             print("Photon: unknown state")
+        }
+        if (clnt.state == 15) { // Connected
+            statusViewController.errorHandler?.reportOK(module: .connection)
+        } else {
+            statusViewController.errorHandler?.reportError(module: .connection, str: "Connection not ready:"+PeerStatesStr[Int(clnt.state)])
         }
         netLogic.service()
     }
