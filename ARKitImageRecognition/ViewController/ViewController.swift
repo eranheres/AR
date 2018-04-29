@@ -52,6 +52,9 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         sceneView.delegate = self
         sceneView.session.delegate = self
         
+        sceneView.autoenablesDefaultLighting = true
+        sceneView.automaticallyUpdatesLighting = true
+        
         // Hook up status view controller callback(s).
         statusViewController.restartExperienceHandler = { [unowned self] in          self.restartExperience() }
         statusViewController.joinHandler = { [unowned self] in self.startJoinSequence() }
@@ -123,7 +126,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         resetTracking()
         
         posMessageTimer = Timer.scheduledTimer(
-                            timeInterval:2,
+                            timeInterval:0.1,
                             target: self,
                             selector: #selector(ViewController.sendCameraPos),
                             userInfo: nil,
@@ -164,49 +167,33 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         let configuration = ARWorldTrackingConfiguration()
         configuration.worldAlignment = .gravityAndHeading
         configuration.detectionImages = referenceImages
+        configuration.planeDetection = .horizontal
 
         session.run(configuration, options: [.resetTracking, .removeExistingAnchors])
 
         self.addAxisWorldOrigin()
         self.statusViewController.showMessage("Reseting world origin")
         statusViewController.scheduleMessage("Look around to detect images", inSeconds: 7.5, messageType: .contentPlacement)
+        
 	}
 
-    // MARK: - ARSCNViewDelegate (Image detection results)
-    /// - Tag: ARImageAnchor-Visualizing
-    func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
-        guard let imageAnchor = anchor as? ARImageAnchor else { return }
+    func renderDetectedImage(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for imageAnchor: ARImageAnchor) {
         let referenceImage = imageAnchor.referenceImage
         
         updateQueue.async {
-            
-            // Create a plane to visualize the initial position of the detected image.
             let plane = SCNPlane(width: referenceImage.physicalSize.width,
                                  height: referenceImage.physicalSize.height)
             let planeNode = SCNNode(geometry: plane)
-            planeNode.opacity = 0.75
-            
-            /*
-             `SCNPlane` is vertically oriented in its local coordinate space, but
-             `ARImageAnchor` assumes the image is horizontal in its local space, so
-             rotate the plane to match.
-             */
+            planeNode.opacity = 0.4
             planeNode.eulerAngles.x = -.pi / 2
-            
-            /*
-             Image anchors are not tracked after initial detection, so create an
-             animation that limits the duration for which the plane visualization appears.
-             */
             planeNode.runAction(self.imageHighlightAction)
-            
-            // Add the plane visualization to the scene.
             node.addChildNode(planeNode)
         }
         
         updateQueue.async {
-            self.sendWorldAlignmentMessage(vector: SCNMatrix4(anchor.transform).vector)
+            self.sendWorldAlignmentMessage(vector: SCNMatrix4(imageAnchor.transform).vector)
         }
-
+        
         updateQueue.async {
             let box = SCNBox(width: referenceImage.physicalSize.width,
                              height: referenceImage.physicalSize.height,
@@ -217,12 +204,61 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             // Add the plane visualization to the scene.
             node.addChildNode(boxNode)
         }
-
+        
         DispatchQueue.main.async {
             let imageName = referenceImage.name ?? ""
             self.statusViewController.cancelAllScheduledMessages()
             self.statusViewController.showMessage("Detected image “\(imageName)”")
         }
+    }
+    
+    func renderPlane(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for planeAnchor: ARPlaneAnchor) {
+        let width = CGFloat(planeAnchor.extent.x)
+        let height = CGFloat(planeAnchor.extent.z)
+        let plane = SCNPlane(width: width, height: height)
+        
+        plane.materials.first?.diffuse.contents = UIColor.lightGray
+        plane.materials.first?.transparency = 0.3
+        let planeNode = SCNNode(geometry: plane)
+        
+        let x = CGFloat(planeAnchor.center.x)
+        let y = CGFloat(planeAnchor.center.y)
+        let z = CGFloat(planeAnchor.center.z)
+        planeNode.position = SCNVector3(x,y,z)
+        planeNode.eulerAngles.x = -.pi / 2
+        
+       // planeNode.physicsBody = SCNPhysicsBody(type: .static, shape: nil)
+      //  planeNode.physicsBody?.isAffectedByGravity = false
+        
+        node.addChildNode(planeNode)
+    }
+    
+    // MARK: - ARSCNViewDelegate (Image detection results)
+    /// - Tag: ARImageAnchor-Visualizing
+    func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
+        if let imageAnchor = anchor as? ARImageAnchor {
+            renderDetectedImage(renderer, didAdd: node, for: imageAnchor)
+        }
+        if let planeAnchor = anchor as? ARPlaneAnchor {
+            renderPlane(renderer, didAdd: node, for: planeAnchor)
+        }
+    }
+    
+    func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {
+        guard let planeAnchor = anchor as?  ARPlaneAnchor,
+            let planeNode = node.childNodes.first,
+            let plane = planeNode.geometry as? SCNPlane
+            else { return }
+        
+        let width = CGFloat(planeAnchor.extent.x)
+        let height = CGFloat(planeAnchor.extent.z)
+        plane.width = width
+        plane.height = height
+        
+        let x = CGFloat(planeAnchor.center.x)
+        let y = CGFloat(planeAnchor.center.y)
+        let z = CGFloat(planeAnchor.center.z)
+        planeNode.position = SCNVector3(x, y, z)
     }
 
     var imageHighlightAction: SCNAction {
@@ -287,20 +323,28 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     }
     */
     @objc func didTap(withGestureRecognizer recognizer: UIGestureRecognizer) {
-        //let transform = SCNMatrix4MakeTranslation(-1.0, 0, 0)
-        //session.setWorldOrigin(relativeTransform: float4x4.init(transform))
-        //let transform = SCNMatrix4MakeTranslation(0,0,0)
-
-        
         let tapLocation = recognizer.location(in: sceneView)
         let hitTestResults = sceneView.hitTest(tapLocation)
-        //let transform = SCNMatrix4MakeTranslation(0,0,0)
-        //session.setWorldOrigin(relativeTransform: float4x4.init(m2))
-        guard let node = hitTestResults.first?.node else {
+        guard let hitTestResult = hitTestResults.first else {
             addBoxOnTouch()
             return
         }
+        
+        let x = hitTestResult.worldCoordinates.x
+        let y = hitTestResult.worldCoordinates.y+0.030
+        let z = hitTestResult.worldCoordinates.z
+        SCNMatrix4MakeTranslation(x,y,z)
+        _ = addBoxOnTransform(id: "obj-"+UUID().uuidString, transform: SCNMatrix4MakeTranslation(x,y,z))
+
+/*
+
+        let node = hitTestResult.node
+        if let _ = node.geometry as? SCNPlane {
+            return
+        }
         node.removeFromParentNode()
+ */
+
         
     }
     
@@ -360,8 +404,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         boxNode.geometry = box
         boxNode.name = id
         boxNode.transform = transform
-        boxNode.physicsBody = SCNPhysicsBody(type: .dynamic, shape: nil)
-        boxNode.physicsBody?.isAffectedByGravity = false
+//      boxNode.physicsBody = SCNPhysicsBody(type: .dynamic, shape: nil)
+//      boxNode.physicsBody?.isAffectedByGravity = false
         sceneView.scene.rootNode.addChildNode(boxNode)
         return boxNode
     }

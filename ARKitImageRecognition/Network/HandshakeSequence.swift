@@ -13,10 +13,11 @@ import CoreLocation
 protocol HandshakeSequenceDelegate {
     // Handler to set world alignment with offset coordinates
     func worldAlignmentCallback(_ relativeTransform: SCNMatrix4) -> Void
+     func handshakeSuccess() -> Void
     
     // Delegates to get the device info
     func realHeadingDelegate () -> CLHeading?
-    func camVectorsDelegate () -> CamObject?   
+    func camVectorsDelegate () -> CamObject?
 }
 
 class HandshakeSequence {
@@ -112,6 +113,7 @@ class HandshakeSequence {
         print("Verified sample \(verifiedSamplesCount)")
         if verifiedSamplesCount >= 5 {
             stop()
+            delegate.handshakeSuccess()
             // let transform = SCNMatrix4MakeRotation(Float(CGFloat.pi/2), 0.0,1.0,0.0)
             // delegate.worldAlignmentCallback(transform)
         }

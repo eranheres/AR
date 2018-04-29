@@ -15,6 +15,7 @@
 		C41366B91EB80DD400EC054A /* StatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41366B81EB80DD400EC054A /* StatusViewController.swift */; };
 		C8C12A711F29277B00B011FE /* ViewController+ARSessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C12A701F29277B00B011FE /* ViewController+ARSessionDelegate.swift */; };
 		D00556B4209494E700A5445E /* SCNNode + drawLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00556B3209494E700A5445E /* SCNNode + drawLine.swift */; };
+		D00556BB2095038900A5445E /* ErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00556BA2095038900A5445E /* ErrorHandler.swift */; };
 		D0318B4F208F4BD200E6CD84 /* NetworkLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0318B4D208F4BD200E6CD84 /* NetworkLogic.swift */; };
 		D0318B50208F4BD200E6CD84 /* DemoConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0318B4E208F4BD200E6CD84 /* DemoConstants.swift */; };
 		D0318C58208F959600E6CD84 /* ViewController+PothonDelegateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0318C57208F959600E6CD84 /* ViewController+PothonDelegateView.swift */; };
@@ -70,6 +71,7 @@
 		C41366B81EB80DD400EC054A /* StatusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusViewController.swift; sourceTree = "<group>"; };
 		C8C12A701F29277B00B011FE /* ViewController+ARSessionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+ARSessionDelegate.swift"; sourceTree = "<group>"; };
 		D00556B3209494E700A5445E /* SCNNode + drawLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SCNNode + drawLine.swift"; sourceTree = "<group>"; };
+		D00556BA2095038900A5445E /* ErrorHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorHandler.swift; sourceTree = "<group>"; };
 		D0318B4D208F4BD200E6CD84 /* NetworkLogic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkLogic.swift; sourceTree = "<group>"; };
 		D0318B4E208F4BD200E6CD84 /* DemoConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoConstants.swift; sourceTree = "<group>"; };
 		D0318BDD208F5A8E00E6CD84 /* demo_iPhone_loadBalancing_swift-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "demo_iPhone_loadBalancing_swift-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -165,6 +167,7 @@
 			isa = PBXGroup;
 			children = (
 				C41366B81EB80DD400EC054A /* StatusViewController.swift */,
+				D00556BA2095038900A5445E /* ErrorHandler.swift */,
 			);
 			path = "Additional View Controllers";
 			sourceTree = "<group>";
@@ -497,6 +500,7 @@
 				D0318C58208F959600E6CD84 /* ViewController+PothonDelegateView.swift in Sources */,
 				D044164F20938B170022492F /* ViewController+HandshakeSequence.swift in Sources */,
 				D0318C5D208FDDBE00E6CD84 /* ARObject.swift in Sources */,
+				D00556BB2095038900A5445E /* ErrorHandler.swift in Sources */,
 				D0318B50208F4BD200E6CD84 /* DemoConstants.swift in Sources */,
 				3929C48E1E89EC2C00E00B60 /* ViewController.swift in Sources */,
 				D0318C64209079C000E6CD84 /* ViewController+NetworkDelegate.swift in Sources */,

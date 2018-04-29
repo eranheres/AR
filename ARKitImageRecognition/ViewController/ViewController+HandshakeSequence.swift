@@ -9,12 +9,17 @@
 import Foundation
 import SceneKit
 import CoreLocation
+import AudioToolbox
 
 extension ViewController:  HandshakeSequenceDelegate {
     
     func startHandshake() {
         //let transform = SCNMatrix4MakeRotation(3.14159, 0.0,1.0,0.0)
         self.handshakeSequence?.start()
+    }
+    
+    func handshakeSuccess() {
+        AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
     }
     
     func handshakeApplyCameraInfo(camera: CamObject) {
