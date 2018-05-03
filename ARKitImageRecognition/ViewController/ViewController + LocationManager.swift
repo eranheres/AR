@@ -10,18 +10,8 @@ import Foundation
 import CoreLocation
 import UIKit
 
-extension CGFloat {
-    var degreesToRadians: CGFloat { return self * .pi / 180 }
-    var radiansToDegrees: CGFloat { return self * 180 / .pi }
-}
-
-private extension Double {
-    var degreesToRadians: Double { return Double(CGFloat(self).degreesToRadians) }
-    var radiansToDegrees: Double { return Double(CGFloat(self).radiansToDegrees) }
-}
-
 extension ViewController:  CLLocationManagerDelegate {
-    
+ 
     func initLocationManager() {
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
@@ -33,9 +23,12 @@ extension ViewController:  CLLocationManagerDelegate {
         let heading = newHeading.trueHeading
         let accuracy = newHeading.headingAccuracy
         if (accuracy > 45) {
-            print("bad north accuracy:\(accuracy) heading:\(heading);\(heading.degreesToRadians)")
+            let str = ("bad north accuracy:\(accuracy) heading:\(heading);\(CGFloat(heading).degreesToRadians)")
+            self.statusViewController.errorHandler?.reportError(module: .heading, str: str)
+        } else {
+            self.statusViewController.errorHandler?.reportOK(module: .heading)
         }
-        
-        // self.statusViewController.showMessage("North: acc:\(accuracy) heading:\(heading)")
     }
 }
+
+

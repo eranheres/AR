@@ -9,6 +9,41 @@
 import Foundation
 import SceneKit
 
+
+extension SCNVector3 {
+    public init(_ v: String) {
+        self.init(v.components(separatedBy: ",").map{ $0.floatValue })
+    }
+    public init(_ v: [Float]) {
+        self.init()
+        self.x = v[0]
+        self.y = v[1]
+        self.z = v[2]
+    }
+    var transform : SCNMatrix4 { return SCNMatrix4MakeTranslation(x,y,z) }
+    var array : [Float] { return [x,y,z] }
+    var str : String { return String(format:"%.3f,%.3f,%.3f",x,y,z) }
+    var length : Float { return GLKVector3Length(GLKVector3Make(x,y,z)) }
+}
+extension SCNMatrix4 {
+    var vector : SCNVector3 { return SCNVector3(m41,m42,m43) }
+}
+
+extension CGFloat {
+    var degreesToRadians: CGFloat { return self * .pi / 180 }
+    var radiansToDegrees: CGFloat { return self * 180 / .pi }
+}
+
+private extension Double {
+    var degreesToRadians: Double { return Double(CGFloat(self).degreesToRadians) }
+    var radiansToDegrees: Double { return Double(CGFloat(self).radiansToDegrees) }
+}
+
+extension String {
+    var floatValue: Float {
+        return (self as NSString).floatValue
+    }
+}
 extension SCNNode {
     
     func buildLineInTwoPointsWithRotation(from startPoint: SCNVector3,
@@ -84,5 +119,6 @@ extension SCNNode {
         return self
     }
 }
+
 
 //extension ended.

@@ -14,18 +14,21 @@
 		39D8DC1B1E8ADAE600386B05 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 39D8DC1A1E8ADAE600386B05 /* LaunchScreen.storyboard */; };
 		C41366B91EB80DD400EC054A /* StatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41366B81EB80DD400EC054A /* StatusViewController.swift */; };
 		C8C12A711F29277B00B011FE /* ViewController+ARSessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8C12A701F29277B00B011FE /* ViewController+ARSessionDelegate.swift */; };
-		D00556B4209494E700A5445E /* SCNNode + drawLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00556B3209494E700A5445E /* SCNNode + drawLine.swift */; };
+		D00556B4209494E700A5445E /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00556B3209494E700A5445E /* Helpers.swift */; };
 		D00556BB2095038900A5445E /* ErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00556BA2095038900A5445E /* ErrorHandler.swift */; };
+		D00556BD209611C800A5445E /* ViewController+import ARKit import SceneKit import UIKit import CoreLocation  class ViewController+ARSCNViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00556BC209611C800A5445E /* ViewController+import ARKit import SceneKit import UIKit import CoreLocation  class ViewController+ARSCNViewDelegate.swift */; };
+		D00556C020964BCF00A5445E /* Jumper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00556BF20964BCF00A5445E /* Jumper.swift */; };
+		D00556C22097152B00A5445E /* Shoot.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00556C12097152B00A5445E /* Shoot.swift */; };
+		D00556C420971C8900A5445E /* MPAREngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00556C320971C8900A5445E /* MPAREngine.swift */; };
+		D00556C72097561500A5445E /* MPARNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00556C62097561500A5445E /* MPARNode.swift */; };
+		D00556C920975BA800A5445E /* MPAREngine + HandshakeDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00556C820975BA800A5445E /* MPAREngine + HandshakeDelegate.swift */; };
 		D0318B4F208F4BD200E6CD84 /* NetworkLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0318B4D208F4BD200E6CD84 /* NetworkLogic.swift */; };
-		D0318B50208F4BD200E6CD84 /* DemoConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0318B4E208F4BD200E6CD84 /* DemoConstants.swift */; };
-		D0318C58208F959600E6CD84 /* ViewController+PothonDelegateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0318C57208F959600E6CD84 /* ViewController+PothonDelegateView.swift */; };
+		D0318B50208F4BD200E6CD84 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0318B4E208F4BD200E6CD84 /* Constants.swift */; };
 		D0318C5B208FD75600E6CD84 /* NetworkApplicationLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0318C5A208FD75600E6CD84 /* NetworkApplicationLayer.swift */; };
 		D0318C5D208FDDBE00E6CD84 /* ARObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0318C5C208FDDBE00E6CD84 /* ARObject.swift */; };
 		D0318C62209070C300E6CD84 /* NetworkTransportLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0318C61209070C300E6CD84 /* NetworkTransportLayer.swift */; };
-		D0318C64209079C000E6CD84 /* ViewController+NetworkDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0318C63209079C000E6CD84 /* ViewController+NetworkDelegate.swift */; };
-		D0318C6820920FDF00E6CD84 /* ViewController+LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0318C6720920FDF00E6CD84 /* ViewController+LocationManager.swift */; };
+		D0318C6820920FDF00E6CD84 /* ViewController + LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0318C6720920FDF00E6CD84 /* ViewController + LocationManager.swift */; };
 		D044161F209371D10022492F /* HandshakeSequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = D044161E209371D10022492F /* HandshakeSequence.swift */; };
-		D044164F20938B170022492F /* ViewController+HandshakeSequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = D044164E20938B170022492F /* ViewController+HandshakeSequence.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,10 +73,16 @@
 		39D8DC1A1E8ADAE600386B05 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C41366B81EB80DD400EC054A /* StatusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusViewController.swift; sourceTree = "<group>"; };
 		C8C12A701F29277B00B011FE /* ViewController+ARSessionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+ARSessionDelegate.swift"; sourceTree = "<group>"; };
-		D00556B3209494E700A5445E /* SCNNode + drawLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SCNNode + drawLine.swift"; sourceTree = "<group>"; };
+		D00556B3209494E700A5445E /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		D00556BA2095038900A5445E /* ErrorHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorHandler.swift; sourceTree = "<group>"; };
+		D00556BC209611C800A5445E /* ViewController+import ARKit import SceneKit import UIKit import CoreLocation  class ViewController+ARSCNViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+import ARKit import SceneKit import UIKit import CoreLocation  class ViewController+ARSCNViewDelegate.swift"; sourceTree = "<group>"; };
+		D00556BF20964BCF00A5445E /* Jumper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Jumper.swift; sourceTree = "<group>"; };
+		D00556C12097152B00A5445E /* Shoot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shoot.swift; sourceTree = "<group>"; };
+		D00556C320971C8900A5445E /* MPAREngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPAREngine.swift; sourceTree = "<group>"; };
+		D00556C62097561500A5445E /* MPARNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPARNode.swift; sourceTree = "<group>"; };
+		D00556C820975BA800A5445E /* MPAREngine + HandshakeDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MPAREngine + HandshakeDelegate.swift"; sourceTree = "<group>"; };
 		D0318B4D208F4BD200E6CD84 /* NetworkLogic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkLogic.swift; sourceTree = "<group>"; };
-		D0318B4E208F4BD200E6CD84 /* DemoConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoConstants.swift; sourceTree = "<group>"; };
+		D0318B4E208F4BD200E6CD84 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		D0318BDD208F5A8E00E6CD84 /* demo_iPhone_loadBalancing_swift-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "demo_iPhone_loadBalancing_swift-Bridging-Header.h"; sourceTree = "<group>"; };
 		D0318BF6208F826D00E6CD84 /* CustomType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomType.h; sourceTree = "<group>"; };
 		D0318BF7208F826D00E6CD84 /* platformLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = platformLayer.h; sourceTree = "<group>"; };
@@ -140,14 +149,11 @@
 		D0318C38208F826D00E6CD84 /* ANSIString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ANSIString.h; sourceTree = "<group>"; };
 		D0318C39208F826D00E6CD84 /* Base.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Base.h; sourceTree = "<group>"; };
 		D0318C43208F8AA900E6CD84 /* LoadBalancing-objc.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "LoadBalancing-objc.xcodeproj"; path = "Photon-iOS-Sdk_v4-1-9-0/LoadBalancing-objc/LoadBalancing-objc.xcodeproj"; sourceTree = "<group>"; };
-		D0318C57208F959600E6CD84 /* ViewController+PothonDelegateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+PothonDelegateView.swift"; sourceTree = "<group>"; };
 		D0318C5A208FD75600E6CD84 /* NetworkApplicationLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkApplicationLayer.swift; sourceTree = "<group>"; };
 		D0318C5C208FDDBE00E6CD84 /* ARObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARObject.swift; sourceTree = "<group>"; };
 		D0318C61209070C300E6CD84 /* NetworkTransportLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkTransportLayer.swift; sourceTree = "<group>"; };
-		D0318C63209079C000E6CD84 /* ViewController+NetworkDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+NetworkDelegate.swift"; sourceTree = "<group>"; };
-		D0318C6720920FDF00E6CD84 /* ViewController+LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+LocationManager.swift"; sourceTree = "<group>"; };
+		D0318C6720920FDF00E6CD84 /* ViewController + LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController + LocationManager.swift"; sourceTree = "<group>"; };
 		D044161E209371D10022492F /* HandshakeSequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandshakeSequence.swift; sourceTree = "<group>"; };
-		D044164E20938B170022492F /* ViewController+HandshakeSequence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+HandshakeSequence.swift"; sourceTree = "<group>"; };
 		FBC70A90FBC6FF5000000001 /* SampleCode.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = SampleCode.xcconfig; path = Configuration/SampleCode.xcconfig; sourceTree = "<group>"; };
 		FE513BF0FE50FDF000000001 /* LICENSE.txt */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -211,12 +217,39 @@
 			isa = PBXGroup;
 			children = (
 				3929C48B1E89EC2C00E00B60 /* AppDelegate.swift */,
+				D00556C5209755F700A5445E /* MPAR */,
+				D00556BE20964BB300A5445E /* objects */,
 				D0318C6020906BF900E6CD84 /* ViewController */,
-				D0318C5E20906BBC00E6CD84 /* Network */,
 				1488324B1EFC3EBF0043E0AB /* Additional View Controllers */,
 				1488324C1EFC3ED00043E0AB /* Resources */,
 			);
 			path = ARKitImageRecognition;
+			sourceTree = "<group>";
+		};
+		D00556BE20964BB300A5445E /* objects */ = {
+			isa = PBXGroup;
+			children = (
+				D00556BF20964BCF00A5445E /* Jumper.swift */,
+				D00556C12097152B00A5445E /* Shoot.swift */,
+			);
+			path = objects;
+			sourceTree = "<group>";
+		};
+		D00556C5209755F700A5445E /* MPAR */ = {
+			isa = PBXGroup;
+			children = (
+				D044161E209371D10022492F /* HandshakeSequence.swift */,
+				D00556C320971C8900A5445E /* MPAREngine.swift */,
+				D00556C62097561500A5445E /* MPARNode.swift */,
+				D00556C820975BA800A5445E /* MPAREngine + HandshakeDelegate.swift */,
+				D00556B3209494E700A5445E /* Helpers.swift */,
+				D0318B4D208F4BD200E6CD84 /* NetworkLogic.swift */,
+				D0318C5A208FD75600E6CD84 /* NetworkApplicationLayer.swift */,
+				D0318C61209070C300E6CD84 /* NetworkTransportLayer.swift */,
+				D0318C5C208FDDBE00E6CD84 /* ARObject.swift */,
+				D0318B4E208F4BD200E6CD84 /* Constants.swift */,
+			);
+			path = MPAR;
 			sourceTree = "<group>";
 		};
 		D0318B3E208F4AEA00E6CD84 /* libs */ = {
@@ -347,29 +380,13 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		D0318C5E20906BBC00E6CD84 /* Network */ = {
-			isa = PBXGroup;
-			children = (
-				D0318C5C208FDDBE00E6CD84 /* ARObject.swift */,
-				D0318C5A208FD75600E6CD84 /* NetworkApplicationLayer.swift */,
-				D0318C61209070C300E6CD84 /* NetworkTransportLayer.swift */,
-				D0318B4E208F4BD200E6CD84 /* DemoConstants.swift */,
-				D0318B4D208F4BD200E6CD84 /* NetworkLogic.swift */,
-				D044161E209371D10022492F /* HandshakeSequence.swift */,
-				D00556B3209494E700A5445E /* SCNNode + drawLine.swift */,
-			);
-			path = Network;
-			sourceTree = "<group>";
-		};
 		D0318C6020906BF900E6CD84 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
 				3929C48D1E89EC2C00E00B60 /* ViewController.swift */,
+				D0318C6720920FDF00E6CD84 /* ViewController + LocationManager.swift */,
 				C8C12A701F29277B00B011FE /* ViewController+ARSessionDelegate.swift */,
-				D0318C57208F959600E6CD84 /* ViewController+PothonDelegateView.swift */,
-				D0318C63209079C000E6CD84 /* ViewController+NetworkDelegate.swift */,
-				D0318C6720920FDF00E6CD84 /* ViewController+LocationManager.swift */,
-				D044164E20938B170022492F /* ViewController+HandshakeSequence.swift */,
+				D00556BC209611C800A5445E /* ViewController+import ARKit import SceneKit import UIKit import CoreLocation  class ViewController+ARSCNViewDelegate.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -496,21 +513,24 @@
 			buildActionMask = 2147483647;
 			files = (
 				D044161F209371D10022492F /* HandshakeSequence.swift in Sources */,
+				D00556C22097152B00A5445E /* Shoot.swift in Sources */,
 				D0318C62209070C300E6CD84 /* NetworkTransportLayer.swift in Sources */,
-				D0318C58208F959600E6CD84 /* ViewController+PothonDelegateView.swift in Sources */,
-				D044164F20938B170022492F /* ViewController+HandshakeSequence.swift in Sources */,
+				D00556C920975BA800A5445E /* MPAREngine + HandshakeDelegate.swift in Sources */,
+				D00556C72097561500A5445E /* MPARNode.swift in Sources */,
 				D0318C5D208FDDBE00E6CD84 /* ARObject.swift in Sources */,
 				D00556BB2095038900A5445E /* ErrorHandler.swift in Sources */,
-				D0318B50208F4BD200E6CD84 /* DemoConstants.swift in Sources */,
+				D0318B50208F4BD200E6CD84 /* Constants.swift in Sources */,
+				D00556BD209611C800A5445E /* ViewController+import ARKit import SceneKit import UIKit import CoreLocation  class ViewController+ARSCNViewDelegate.swift in Sources */,
+				D00556C020964BCF00A5445E /* Jumper.swift in Sources */,
 				3929C48E1E89EC2C00E00B60 /* ViewController.swift in Sources */,
-				D0318C64209079C000E6CD84 /* ViewController+NetworkDelegate.swift in Sources */,
 				C41366B91EB80DD400EC054A /* StatusViewController.swift in Sources */,
+				D00556C420971C8900A5445E /* MPAREngine.swift in Sources */,
 				C8C12A711F29277B00B011FE /* ViewController+ARSessionDelegate.swift in Sources */,
 				D0318B4F208F4BD200E6CD84 /* NetworkLogic.swift in Sources */,
 				D0318C5B208FD75600E6CD84 /* NetworkApplicationLayer.swift in Sources */,
 				3929C48C1E89EC2C00E00B60 /* AppDelegate.swift in Sources */,
-				D00556B4209494E700A5445E /* SCNNode + drawLine.swift in Sources */,
-				D0318C6820920FDF00E6CD84 /* ViewController+LocationManager.swift in Sources */,
+				D00556B4209494E700A5445E /* Helpers.swift in Sources */,
+				D0318C6820920FDF00E6CD84 /* ViewController + LocationManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

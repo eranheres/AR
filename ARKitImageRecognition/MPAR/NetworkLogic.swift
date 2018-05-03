@@ -30,7 +30,7 @@ let PeerStatesStr : [String] =
 	"Disconnected",
 ];
 
-protocol PhotonDelegateView
+protocol NetworkStateDelegate
 {
 	func log(_: String) -> Void
     func showState(_ state : Int, stateStr : String, roomName : String, playerNr : Int32, inLobby : Bool, inRoom : Bool)
@@ -39,10 +39,10 @@ protocol PhotonDelegateView
 class PhotonListener : NSObject, EGLoadBalancingListener
 {
 	var networkLogic : NetworkLogic!
-	let delegateView : PhotonDelegateView
+	let delegateView : NetworkStateDelegate
     var delegateTransportLayer : NetworkTransportLayerDelegate?
     
-    init(networkLogic : NetworkLogic, demoView : PhotonDelegateView)
+    init(networkLogic : NetworkLogic, demoView : NetworkStateDelegate)
 	{
 		self.networkLogic = networkLogic
 		self.delegateView = demoView
@@ -173,11 +173,11 @@ class PhotonListener : NSObject, EGLoadBalancingListener
 class NetworkLogic : NetworkTransportLayerDelegate, NetworkTransportLayerProtocol
 {
 	var client : EGLoadBalancingClient!
-	let demoView : PhotonDelegateView
+	let demoView : NetworkStateDelegate
 	var listenerRef : PhotonListener! // store reference to prevent listener destroy
     let netApplicationLayer : NetworkApplicationLayer
     	
-    init(demoView : PhotonDelegateView, networkApplicationLayer: NetworkApplicationLayer)
+    init(demoView : NetworkStateDelegate, networkApplicationLayer: NetworkApplicationLayer)
 	{
 		self.demoView = demoView
         self.netApplicationLayer = networkApplicationLayer

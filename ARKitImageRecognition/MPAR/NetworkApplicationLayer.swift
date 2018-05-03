@@ -11,7 +11,7 @@ import SceneKit
 
 protocol NetworkApplicationLayerDelegate {
     func receiveWorldAlignmentMessage(_ vector: SCNVector3)
-    func receiveObjectsLocationMessage(_ arObjects: [ARObject])
+    func receiveNodesMessage(_ arObjects: [MPARNodeCodable])
     func receiveCameraMessage(_ arObjects: CamObject)
 }
 
@@ -34,7 +34,7 @@ class NetworkApplicationLayer {
         transportLayer?.sendMessage(messageId: MSGID.worldAlignment.rawValue, message: jsonString)
     }
     
-    func sendObjectsLocationMessage(arObjects: [ARObject]) {
+    func sendNodesMessage(arObjects: [MPARNodeCodable]) {
         guard let jsonData = try? JSONEncoder().encode(arObjects) else { return }
         guard let jsonString = String(data: jsonData, encoding: .utf8) else { return }
         let messageId = MSGID.objectsLocation.rawValue
@@ -54,8 +54,8 @@ class NetworkApplicationLayer {
     }
     
     private func handleObjectsLocationMessage(str: String) {
-        guard let objects = try? JSONDecoder().decode([ARObject].self, from: str.data(using: .utf8)!) else { return }
-        delegate?.receiveObjectsLocationMessage(objects)
+        guard let objects = try? JSONDecoder().decode([MPARNodeCodable].self, from: str.data(using: .utf8)!) else { return }
+        delegate?.receiveNodesMessage(objects)
     }
 
     private func handleCameraMessage(str: String) {
